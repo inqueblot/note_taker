@@ -128,7 +128,8 @@ const renderNoteList = (notes) => {
   }
 
   notes.forEach((note) => {
-    const $li = create$li(note.title).data(note);
+    console.log(note)
+    const $li = create$li(`${note.title}\n${note.text}`);
     noteListItems.push($li);
   });
 
