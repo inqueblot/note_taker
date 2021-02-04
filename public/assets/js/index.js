@@ -51,11 +51,12 @@ const renderActiveNote = () => {
 
 // Get the note data from the inputs, save it to the db and update the view
 const handleNoteSave = function () {
+
   const newNote = {
     title: $noteTitle.val(),
     text: $noteText.val(),
+    id: Math.floor(Math.random() * 10000),
   };
-
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -128,8 +129,7 @@ const renderNoteList = (notes) => {
   }
 
   notes.forEach((note) => {
-    console.log(note)
-    const $li = create$li(`${note.title}\n${note.text}`);
+    const $li = create$li(note.title).data(note);
     noteListItems.push($li);
   });
 
@@ -150,3 +150,5 @@ $noteText.on("keyup", handleRenderSaveBtn);
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
+
+
