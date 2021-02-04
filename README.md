@@ -18,7 +18,7 @@
 
 This app allows you to save and recall notes. These notes are stored and deleted using the express module.
 
-![example of application](https://github.com/inqueblot/note_taker/blob/main/Assets/example.gif?raw=true)
+![example of application](https://github.com/inqueblot/note_taker/blob/main/Assets/example.jpeg?raw=true)
 
 ## Installation
 Running this project locally:
