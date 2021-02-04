@@ -5,7 +5,7 @@ var fs = require('fs');
 var notes = [];
 
 var app = express();
-var PORT = process.env.port || 3000;
+var PORT = process.env.PORT || 3000;
 //space magic
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
