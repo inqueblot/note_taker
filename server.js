@@ -5,7 +5,7 @@ var fs = require('fs');
 var notes = [];
 
 var app = express();
-var PORT = 3000;
+var PORT = process.env.port || 3000;
 //space magic
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -34,26 +34,27 @@ app.post('/api/notes', function (req, res) {
     obj.push(myNotes);
     let newNotes = JSON.stringify(obj);
     fs.writeFileSync('./db/db.json', newNotes);
-    res.redirect('back');
+    res.json(obj);
 });
 
 app.delete("/api/notes/:id", function (req, res) {
     let deleteId = req.params.id;
-    console.log(deleteId)
     let obj = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-
+    var rewrite = function (newNotes) {
+        fs.writeFileSync('./db/db.json', newNotes)
+        res.json(obj);
+    };
     for (let i = 0; i < obj.length; i++) {
         console.log(deleteId == obj[i].id)
         // console.log(obj[i].id)
         if (deleteId == obj[i].id) {
             obj.splice([i], 1);
             let newNotes = JSON.stringify(obj);
-            fs.writeFileSync('./db/db.json', newNotes)
-            console.log("we did it")
+            rewrite(newNotes)
         };
 
     };
-    res.redirect('back');
+
 });
 
 
